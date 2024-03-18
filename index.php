@@ -15,7 +15,7 @@ $act = $_GET['act'] ?? '/';
 
 // Biến này cần khai báo được link cần đăng nhập mới vào được
 $arrRouteNeedAuth = [
-    'user-detail', // Đây là 1 ví dụ
+    
 ]; 
 
 // Kiểm tra xem user đã đăng nhập chưa
@@ -23,7 +23,6 @@ middleware_auth_check($act, $arrRouteNeedAuth);
 
 match($act) {
     '/' => homeIndex(),
-    'user-detail' => userDetail($_GET['id']),
 
     // Authen
     'login' => authenShowFormLogin(),
