@@ -1,31 +1,21 @@
 <?php 
 
-function getAllUser() {
-    try {
-        $sql = 'SELECT * FROM users';
+if (!function_exists('getUserClientByEmailAndPassword')) {
+    function getUserClientByEmailAndPassword($email, $password)
+    {
+        try {
+            $sql = "SELECT * FROM users WHERE email = :email AND password = :password AND type = 0 LIMIT 1";
 
-        $stmt = $GLOBALS['conn']->prepare($sql);
+            $stmt = $GLOBALS['conn']->prepare($sql);
 
-        $stmt->execute();
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":password", $password);
 
-        return $stmt->fetchAll();
-    } catch (\Exception $e) {
-        debug($e);
-    }
-}
+            $stmt->execute();
 
-function getUserByID($id) {
-    try {
-        $sql = 'SELECT * FROM users WHERE id = :id';
-
-        $stmt = $GLOBALS['conn']->prepare($sql);
-
-        $stmt->bindParam(':id', $id);
-
-        $stmt->execute();
-
-        return $stmt->fetch();
-    } catch (\Exception $e) {
-        debug($e);
+            return $stmt->fetch();
+        } catch (\Exception $e) {
+            debug($e);
+        }
     }
 }

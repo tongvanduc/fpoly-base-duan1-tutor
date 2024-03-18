@@ -5,22 +5,22 @@ function authenShowFormLogin() {
         authenLogin();
     }
 
-    require_once PATH_VIEW_ADMIN . 'authen/login.php';
+    require_once PATH_VIEW . 'authen/login.php';
 }
 
 function authenLogin() {
-    $user = getUserAdminByEmailAndPassword($_POST['email'], $_POST['password']);
+    $user = getUserClientByEmailAndPassword($_POST['email'], $_POST['password']);
 
     if (empty($user)) {
         $_SESSION['error'] = 'Email hoặc password chưa đúng!';
 
-        header('Location: ' . BASE_URL_ADMIN . '?act=login');
+        header('Location: ' . BASE_URL . '?act=login');
         exit();
     }
 
     $_SESSION['user'] = $user;
 
-    header('Location: ' . BASE_URL_ADMIN);
+    header('Location: ' . BASE_URL);
     exit();
 }
 

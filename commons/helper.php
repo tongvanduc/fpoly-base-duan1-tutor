@@ -28,42 +28,16 @@ if (!function_exists('e404')) {
     }
 }
 
-
-if (!function_exists('upload_file')) {
-    function upload_file($file, $pathFolderUpload) {
-        $imagePath = $pathFolderUpload . time() . '-' . basename($file['name']);
-            
-        if (move_uploaded_file($file['tmp_name'], PATH_UPLOAD . $imagePath)) {
-            return $imagePath;
-        }
-
-        return null;
-    }
-}
-
-
-if (!function_exists('get_file_upload')) {
-    function get_file_upload($field, $default = null) {
-
-        if (isset($_FILES[$field]) && $_FILES[$field]['size'] > 0) {
-
-            return $_FILES[$field];
-        }
-
-        return $default ?? null;
-    }
-}
-
 if (!function_exists('middleware_auth_check')) {
-    function middleware_auth_check($act) {
+    function middleware_auth_check($act, $arrRouteNeedAuth) {
         if ($act == 'login') {
             if (!empty($_SESSION['user'])) {
-                header('Location: ' . BASE_URL_ADMIN);
+                header('Location: ' . BASE_URL);
                 exit();
             }
         } 
-        elseif (empty($_SESSION['user'])) {
-            header('Location: ' . BASE_URL_ADMIN . '?act=login');
+        elseif (empty($_SESSION['user']) && in_array($act, $arrRouteNeedAuth)) {
+            header('Location: ' . BASE_URL . '?act=login');
             exit();
         }
     }

@@ -1,7 +1,7 @@
 <?php 
 
 function homeIndex() {
-    $users = getAllUser();
+    $products = listAll('products');
 
     require_once PATH_VIEW . 'home.php';
 }
