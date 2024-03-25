@@ -24,7 +24,7 @@
                         <div class="card-body">
                             <h4 class="card-title"><?= $product['name'] ?></h4>
                             <p class="card-text"><?= $product['overview'] ?></p>
-                            <a href="#" class="btn btn-primary">Add to cart</a>
+                            <a href="<?= BASE_URL . '?act=cart-add&productID=' . $product['id'] . '&quantity=1' ?>" class="btn btn-primary">Add to cart</a>
                         </div>
                     </div>
                 </div>

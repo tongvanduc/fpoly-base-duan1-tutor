@@ -139,7 +139,7 @@ if (!function_exists('update')) {
     }
 }
 
-if (!function_exists('delete')) {
+if (!function_exists('delete2')) {
     function delete2($tableName, $id) {
         try {
             $sql = "DELETE FROM $tableName WHERE id = :id";
